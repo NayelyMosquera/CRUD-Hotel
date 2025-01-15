@@ -110,8 +110,8 @@ Esto levantará ambos contenedores y podrás acceder a la aplicación en tu nave
 
 ## Acceso a la Aplicación
 
-- El frontend estará disponible en `http://localhost:3000` (puede variar según la configuración en `docker-compose.yml`).
-- El backend estará disponible en `http://localhost:5000` (puede variar según la configuración en `docker-compose.yml`).
+- El frontend estará disponible en `http://localhost:80` (puede variar según la configuración en `docker-compose.yml`).
+- El backend estará disponible en `http://localhost:3000` (puede variar según la configuración en `docker-compose.yml`).
 
 ## Detener los Contenedores
 
@@ -120,7 +120,11 @@ Para detener los contenedores en ejecución, presiona `Ctrl + C` en la terminal 
 ```
 docker-compose down
 ```
+## Instalar las dependecias del backend como del frontend 
 
+```
+npm install
+```
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, por favor abre un issue o un pull request.
