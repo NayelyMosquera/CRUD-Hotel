@@ -1,7 +1,6 @@
 import { mongoHelper } from "../helpers/MongoHelper.js";
 import { ObjectId } from 'mongodb';
 import { error_response, custom_response, create_response } from "../helpers/Response.js";
-import { createJwtToken } from "../utils/Token.js";
 import bcrypt from "bcryptjs"; // Usando bcryptjs
 import fs from "fs";
 
