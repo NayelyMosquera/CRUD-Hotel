@@ -1,0 +1,362 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  margin: -1rem 0 -1rem -1rem;
+  background-color: #F8F9FA; /* md-surface-variant */
+}
+
+.selectForm{
+  padding: 0.75rem 1rem;
+}
+
+.sidebar {
+  width: 280px;
+  transition: width 0.3s ease, padding 0.3s ease;
+  background: linear-gradient(45deg, #FF4B2B, #FF416C);
+  padding: 2rem;
+  color: #FFFFFF;
+  overflow: hidden;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.titulo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  padding-bottom: 3.5rem;
+  padding-left: 2rem;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  padding: 1rem;
+}
+
+.sidebar.collapsed .titulo {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.sider-row{
+  display: flex;
+  align-items: center;
+}
+
+.page-content {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 20px;
+}
+
+.bg-white {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+} 
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #F8F9FA;
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 80px;
+}
+
+/* Table Styles */
+.table-container {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-head {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #E9ECEF;
+}
+
+.table-head th {
+  padding: 1.25rem 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  color: #2D3436;
+  text-align: left;
+}
+
+.table-body td {
+  padding: 1rem;
+}
+
+.table-body tr:hover {
+  background-color: #F8F9FA;
+}
+
+/* Form Styles */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.formularioClientes,
+.formularioHabitacion,
+.formularioReservacion,
+.FormularioActualizarClientes,
+.FormularioActualizarHabitacion,
+.FormularioActualizarReservacion {
+  background: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+form label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #2D3436;
+}
+
+form input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E9ECEF;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:hover {
+  border-color: #FF4B2B;
+  background-color: #fff;
+}
+
+form input:focus {
+  border-color: #FF4B2B;
+  box-shadow: 0 0 0 2px rgba(255, 75, 43, 0.1);
+  outline: none;
+}
+
+/* Button Styles */
+.button-action {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 0.5rem;
+  background: transparent;
+  border: 1px solid #E9ECEF;
+  color: #2D3436;
+}
+
+.button-action:hover {
+  background: #F8F9FA;
+  border-color: #FF4B2B;
+  color: #FF4B2B;
+}
+
+button[type="submit"],
+.center-button {
+  background: linear-gradient(45deg, #FF4B2B, #FF416C);
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover,
+.center-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Section Headers */
+h2 {
+  color: #2D3436;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .sidebar li {
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  .sidebar button {
+    width: auto;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    min-width: min-content;
+  }
+
+  .sider-row {
+    display: inline-flex;
+    width: auto;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .sidebar.collapsed .titulo {
+    display: block;
+  }
+
+  .sidebar.collapsed .sidebar-header {
+    justify-content: flex-start;
+  }
+
+  .sidebar-header {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .sidebar.collapsed + .main-content {
+    margin-left: 0;
+  }
+
+  .Hotel {
+    max-width: 800px;
+    max-height: 400px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .sidebar ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sidebar button {
+    width: 100%;
+  }
+
+  .sidebar li {
+    width: 100%;
+  }
+
+  .formularioClientes,
+  .formularioHabitacion,
+  .formularioReservacion,
+  .FormularioActualizarClientes,
+  .FormularioActualizarHabitacion,
+  .FormularioActualizarReservacion {
+    padding: 1rem;
+  }
+}

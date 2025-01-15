@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: crud_app-mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    healthcheck:
+      test: mongosh --eval "db.adminCommand('ping')"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - MONGO_INITDB_DATABASE=prueba
+
+  backend:
+    build:
+      context: ./backendAPI-main
+      dockerfile: Dockerfile.backend
+    container_name: crud_app-backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/prueba
+      - DB_HOST=mongodb
+      - DB_PORT=27017
+      - DB_DATABASE=prueba
+    depends_on:
+      mongodb:
+        condition: service_started
+
+  frontend:
+    build:
+      context: ./reservaHotelFrontend
+      dockerfile: Dockerfile.frontend
+    container_name: crud_app-frontend
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+networks:
+  app-network:
+    driver: bridge

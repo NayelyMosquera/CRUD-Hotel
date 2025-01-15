@@ -1,0 +1,389 @@
+<!-- inicio.component.html -->
+<div class="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}">
+    <div class="sider-row">
+      <div class="sidebar-header">
+        <button class="toggle-btn d-flex align-items-center justify-content-center" (click)="toggleSidebar()">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+      </div>
+      <div class="titulo" *ngIf="!sidebarCollapsed">
+        <h1 class="mb-0">Panel de Control</h1>
+      </div>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <button class="sidebar-btn d-flex align-items-center gap-2" (click)="clientes()">
+          <i class="bi bi-people" [class.fs-4]="sidebarCollapsed"></i>
+          <span *ngIf="!sidebarCollapsed">Clientes</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="sidebar-btn d-flex align-items-center gap-2" (click)="habitaciones()">
+          <i class="bi bi-door-closed" [class.fs-4]="sidebarCollapsed"></i>
+          <span *ngIf="!sidebarCollapsed">Habitaciones</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="sidebar-btn d-flex align-items-center gap-2" (click)="reservaciones()">
+          <i class="bi bi-calendar-event" [class.fs-4]="sidebarCollapsed"></i>
+          <span *ngIf="!sidebarCollapsed">Reservaciones</span>
+        </button>
+      </li>
+      <li class="nav-item mt-auto">
+        <button class="sidebar-btn d-flex align-items-center gap-2" routerLink="" routerLinkActive="active">
+          <i class="bi bi-box-arrow-right" [class.fs-4]="sidebarCollapsed"></i>
+          <span *ngIf="!sidebarCollapsed">Salir</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Página de bienvenida -->
+  <div class="page-content bg-white p-4" *ngIf="!mostrarClientes && !mostrarHabitaciones && !mostrarReservaciones && !mostrarFormularioCliente 
+  && !mostrarFormularioHabitacion && !mostrarFormularioReservacion && !actualizarFormularioCliente && !actualizarFormularioHabitacion && !actualizarFormularioReservacion">
+    <div class="text-center">
+      <h1 class="display-4 mb-4">Bienvenido al Sistema de Gestión Hotelera</h1>
+      <img src="assets/HOTEL-FONDO.png" alt="Hotel" class="img-fluid rounded shadow mb-4">
+    </div>
+  </div>
+    <!-- Sección Clientes -->
+    <div *ngIf="mostrarClientes">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Cliente</h2>
+        <button type="submit" class="btn btn-primary" (click)="formularioCliente()">
+          <i class="bi bi-plus-circle me-2"></i>Registrar Cliente
+        </button>
+      </div>
+      
+      <div class="table-container">
+        <table class="table table-hover">
+          <thead class="table-head">
+            <tr>
+              <th scope="col">CEDULA</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">APELLIDOS</th>
+              <th scope="col">TELEFONO</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr *ngFor="let cliente of clientesData">
+              <td>{{ cliente.cedula }}</td>
+              <td>{{ cliente.nombre }}</td>
+              <td>{{ cliente.apellidos }}</td>
+              <td>{{ cliente.telefono }}</td>
+              <td>{{ cliente.email }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button class="btn btn-outline-danger btn-sm" (click)="eliminarCliente(cliente.id)">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                  </button>
+                  <button class="btn btn-outline-primary btn-sm ms-2" (click)="actualizarCliente(cliente.id)">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Formulario Registrar Cliente -->
+    <div *ngIf="mostrarFormularioCliente">
+      <div class="container py-4">
+        <div class="formularioClientes">
+          <h2 class="mb-4">Registrar Cliente</h2>
+          <form (ngSubmit)="guardarCliente()" class="needs-validation">
+            <div class="mb-3">
+              <label for="cedula" class="form-label">Cedula:</label>
+              <input type="text" class="form-control" id="cedula" name="cedula" 
+                     [(ngModel)]="clienteData.cedula" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" 
+                     [(ngModel)]="clienteData.nombre" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellidos" class="form-label">Apellidos:</label>
+              <input type="text" class="form-control" id="apellidos" name="apellidos" 
+                     [(ngModel)]="clienteData.apellidos" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono:</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" 
+                     [(ngModel)]="clienteData.telefono" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" 
+                     [(ngModel)]="clienteData.email" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-2"></i>Guardar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario Actualizar Cliente -->
+    <div *ngIf="actualizarFormularioCliente">
+      <div class="container py-4">
+        <div class="FormularioActualizarClientes">
+          <h2 class="mb-4">Actualizar Cliente</h2>
+          <form (ngSubmit)="guardarEdicionCliente()" class="needs-validation">
+            <div class="mb-3">
+              <label for="cedula" class="form-label">Id Cliente:</label>
+              <input type="text" class="form-control" id="cedula" name="cedula" 
+                     [(ngModel)]="clienteData.cedula" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" 
+                     [(ngModel)]="clienteData.nombre" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellidos" class="form-label">Apellidos:</label>
+              <input type="text" class="form-control" id="apellidos" name="apellidos" 
+                     [(ngModel)]="clienteData.apellidos" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono:</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" 
+                     [(ngModel)]="clienteData.telefono" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" 
+                     [(ngModel)]="clienteData.email" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-2"></i>Guardar Cambios
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Habitaciones -->
+    <div *ngIf="mostrarHabitaciones">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Habitaciones</h2>
+        <button type="submit" class="btn btn-primary" (click)="formularioHabitacion()">
+          <i class="bi bi-plus-circle me-2"></i>Registrar Habitación
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="table table-hover">
+          <thead class="table-head">
+            <tr>
+              <th scope="col">#HABITACION</th>
+              <th scope="col">DESCRIPCION</th>
+              <th scope="col">PRECIO</th>
+              <th scope="col">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr *ngFor="let habitacion of habitacionesData">
+              <td>{{ habitacion.habitacion }}</td>
+              <td>{{ habitacion.descripcion }}</td>
+              <td>{{ habitacion.precio | currency }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button class="btn btn-outline-danger btn-sm" (click)="eliminarHabitacion(habitacion.id)">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                  </button>
+                  <button class="btn btn-outline-primary btn-sm ms-2" (click)="actualizarHabitacion(habitacion.id)">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Formulario Registrar Habitación -->
+    <div *ngIf="mostrarFormularioHabitacion">
+      <div class="container py-4">
+        <div class="formularioHabitacion">
+          <h2 class="mb-4">Registrar Habitación</h2>
+          <form (ngSubmit)="guardarHabitacion()" class="needs-validation">
+            <div class="mb-3">
+              <label for="habitacion" class="form-label">#Habitación:</label>
+              <input type="text" class="form-control" id="habitacion" name="habitacion" 
+                     [(ngModel)]="habitacionData.habitacion" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción:</label>
+              <textarea class="form-control" id="descripcion" name="descripcion" 
+                        [(ngModel)]="habitacionData.descripcion" required rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="precio" class="form-label">Precio:</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="precio" name="precio" 
+                       [(ngModel)]="habitacionData.precio" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-2"></i>Guardar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Reservaciones -->
+    <div *ngIf="mostrarReservaciones">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Rerservaciones</h2>
+        <button type="submit" class="btn btn-primary" (click)="formularioReservacion()">
+          <i class="bi bi-plus-circle me-2"></i>Registrar Reservación
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="table table-hover">
+          <thead class="table-head">
+            <tr>
+              <th scope="col">#HABITACION</th>
+              <th scope="col">CEDULA</th>
+              <th scope="col">FECHA INICIO</th>
+              <th scope="col">FECHA FIN</th>
+              <th scope="col">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr *ngFor="let reservacion of reservacionesData">
+              <td>{{ reservacion.habitacion }}</td>
+              <td>{{ reservacion.cedula }}</td>
+              <td>{{ reservacion.fechaInicioString }}</td>
+              <td>{{ reservacion.fechaFinString }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button class="btn btn-outline-danger btn-sm" (click)="eliminarReservacion(reservacion.id)">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                  </button>
+                  <button class="btn btn-outline-primary btn-sm ms-2" (click)="actualizarReservacion(reservacion.id)">
+                    <i class="bi bi-pencil me-1"></i>Editar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Formulario Registrar Reservación -->
+    <div *ngIf="mostrarFormularioReservacion">
+      <div class="container py-4">
+        <div class="formularioReservacion">
+          <h2 class="mb-4">Registrar Reservación</h2>
+          <form (ngSubmit)="guardarReservacion()" class="needs-validation">
+            <div class="mb-3">
+              <label for="id_habitacion" class="form-label">Habitación:</label>
+              <select class="form-select" id="id_habitacion" name="id_habitacion" 
+                      [(ngModel)]="reservacionData.id_habitacion" required>
+                <option value="" disabled selected>Seleccione una habitación</option>
+                <option *ngFor="let habitacion of habitacionesData" [value]="habitacion.id">
+                  Habitación {{ habitacion.habitacion }} - {{ habitacion.descripcion }} - ${{ habitacion.precio }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="id_cliente" class="form-label">Cliente:</label>
+              <select class="form-select" id="id_cliente" name="id_cliente" 
+                      [(ngModel)]="reservacionData.id_cliente" required>
+                <option value="" disabled selected>Seleccione un cliente</option>
+                <option *ngFor="let cliente of clientesData" [value]="cliente.id">
+                  {{ cliente.cedula }} - {{ cliente.nombre }} {{ cliente.apellidos }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="fechaInicio" class="form-label">Fecha Inicio:</label>
+              <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" 
+                     [(ngModel)]="reservacionData.fechaInicio" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fechaFin" class="form-label">Fecha Fin:</label>
+              <input type="date" class="form-control" id="fechaFin" name="fechaFin" 
+                     [(ngModel)]="reservacionData.fechaFin" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-2"></i>Guardar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario Actualizar Reservación -->
+    <div *ngIf="actualizarFormularioReservacion">
+      <div class="container py-4">
+        <div class="FormularioActualizarReservacion">
+          <h2 class="mb-4">Actualizar Reservación</h2>
+          <form (ngSubmit)="guardarEdicionReservacion()" class="needs-validation">
+            <div class="mb-3">
+              <label for="id_habitacion" class="form-label">Habitación:</label>
+              <input type="number" class="form-control" id="id_habitacion" name="id_habitacion" 
+                     [(ngModel)]="reservacionData.id_habitacion" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="id_cliente" class="form-label">Cliente:</label>
+              <input type="number" class="form-control" id="id_cliente" name="id_cliente" 
+                     [(ngModel)]="reservacionData.id_cliente" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fechaInicio" class="form-label">Fecha Inicio:</label>
+              <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" 
+                     [(ngModel)]="reservacionData.fechaInicio" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fechaFin" class="form-label">Fecha Fin:</label>
+              <input type="date" class="form-control" id="fechaFin" name="fechaFin" 
+                     [(ngModel)]="reservacionData.fechaFin" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-save me-2"></i>Guardar Cambios
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

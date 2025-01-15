@@ -1,0 +1,109 @@
+<div class="container-fluid min-vh-100 bg-light d-flex align-items-center justify-content-center py-5">
+  <div class="form-container position-relative bg-white rounded-lg shadow-lg overflow-hidden" [ngClass]="{'right-panel-active': showRegistrationForm}">
+    <!-- Slider Panel -->
+    <div class="slider-panel text-white">
+      <div class="panel-content h-100 d-flex flex-column justify-content-center align-items-center p-4" *ngIf="!showRegistrationForm">
+        <img src="assets/LogoGIF.gif" alt="Company Logo" class="company-logo">
+        <h2 class="mb-4">¡Hola, Amig@!</h2>
+        <p class="text-center mb-4">NO TIENES UNA CUENTA REGISTRATE y comienza tu viaje con nosotros</p>
+        <button (click)="showRegistrationForm = true" class="btn btn-outline-light rounded-pill px-4 py-2">
+          REGISTRARSE
+        </button>
+      </div>
+      <div class="panel-content h-100 d-flex flex-column justify-content-center align-items-center p-4" *ngIf="showRegistrationForm">
+        <img src="assets/LogoGIF.gif" alt="Company Logo" class="company-logo">
+        <h2 class="mb-4">¡Bienvenido de Nuevo!</h2>
+        <p class="text-center mb-4">Si ya TIENES UNA CUENTA inicia sesión</p>
+        <button (click)="showRegistrationForm = false" class="btn btn-outline-light rounded-pill px-4 py-2">
+          INICIAR SESIÓN
+        </button>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-section login px-4">
+      <div class="text-center mb-4">
+        <h2 class="mb-3">Iniciar Sesión</h2>
+        <div class="social-container mb-3">
+        </div>
+        <p class="text-muted">Ingresa tu Cuenta</p>
+      </div>
+      
+      <form (ngSubmit)="login()" class="needs-validation">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="loginEmail" placeholder="nombre@ejemplo.com"
+            [(ngModel)]="loginData.email" name="email" required>
+          <label for="loginEmail">Correo electrónico</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña"
+            [(ngModel)]="loginData.password" name="password" required>
+          <label for="loginPassword">Contraseña</label>
+        </div>
+
+        <div class="text-center mb-3">
+          <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" [disabled]="loading">
+          <span class="spinner-border spinner-border-sm me-2" *ngIf="loading"></span>
+          {{ loading ? 'Cargando...' : 'INICIAR SESIÓN' }}
+        </button>
+
+        <div class="notifications-container" *ngIf="notification">
+          <div class="notification-toast" [ngClass]="notification.type">
+            <div class="notification-content">
+              <i class="bi" [ngClass]="{'bi-exclamation-circle': notification.type === 'error', 'bi-check-circle': notification.type === 'success'}"></i>
+              <span class="notification-message">{{ notification.message }}</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-section register px-4">
+      <div class="text-center mb-4">
+        <h2 class="mb-3">Crear Cuenta</h2>
+        <div class="social-container mb-3">
+        </div>
+        <p class="text-muted">Registrese Ingrese sus datos Personales</p>
+      </div>
+
+      <form (ngSubmit)="register()" class="needs-validation">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="registerName" placeholder="Nombre completo"
+            [(ngModel)]="registrationData.full_name" name="full_name" required>
+          <label for="registerName">Nombre completo</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="registerEmail" placeholder="nombre@ejemplo.com"
+            [(ngModel)]="registrationData.email" name="email" required>
+          <label for="registerEmail">Correo electrónico</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="registerPassword" placeholder="Contraseña"
+            [(ngModel)]="registrationData.password" name="password" required>
+          <label for="registerPassword">Contraseña</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" [disabled]="loading">
+          <span class="spinner-border spinner-border-sm me-2" *ngIf="loading"></span>
+          {{ loading ? 'Cargando...' : 'REGISTRARSE' }}
+        </button>
+
+        <div class="notifications-container" *ngIf="notification">
+          <div class="notification-toast" [ngClass]="notification.type">
+            <div class="notification-content">
+              <i class="bi" [ngClass]="{'bi-exclamation-circle': notification.type === 'error', 'bi-check-circle': notification.type === 'success'}"></i>
+              <span class="notification-message">{{ notification.message }}</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

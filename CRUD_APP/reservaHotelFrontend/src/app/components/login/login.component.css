@@ -1,0 +1,277 @@
+/* Contenedor principal del formulario */
+.form-container {
+  max-width: 900px;
+  min-height: 550px;
+  width: 100%;
+  margin: 20px;
+}
+
+/* Secciones del formulario */
+.form-section {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  width: 50%;
+  padding: 40px 20px;
+  visibility: hidden;
+}
+
+.login {
+  left: 0;
+  z-index: 2;
+  visibility: visible;
+}
+
+.register {
+  left: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Panel deslizante */
+.slider-panel {
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+/* Logo */
+.company-logo {
+  width: auto;
+  height: auto;
+  max-width: 180px;
+  max-height: 180px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+}
+
+/* Controles del formulario */
+.form-floating {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.form-control:hover,
+.form-control:focus {
+  border-color: #FF4B2B;
+  box-shadow: 0 0 5px rgba(255, 75, 43, 0.2);
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #FF4B2B;
+  border-color: #FF4B2B;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #ff3311;
+  border-color: #ff3311;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.3);
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Animaciones del panel */
+.form-container.right-panel-active .login {
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.form-container.right-panel-active .register {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 5;
+  visibility: visible;
+  animation: show 0.6s;
+}
+
+.form-container.right-panel-active .slider-panel {
+  transform: translateX(-100%);
+}
+
+/* Media queries */
+@media (max-width: 991.98px) {
+  .form-container {
+    margin: 15px;
+  }
+  
+  .form-section {
+    padding: 30px 15px;
+  }
+  
+  .company-logo {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .form-container {
+    min-height: auto;
+  }
+
+  .form-section {
+    position: relative;
+    width: 100%;
+    left: 0;
+    visibility: visible;
+    opacity: 1;
+    display: none;
+  }
+
+  .login.form-section {
+    display: block;
+  }
+
+  .form-container.right-panel-active .login.form-section {
+    display: none;
+  }
+
+  .form-container.right-panel-active .register.form-section {
+    display: block;
+  }
+
+  .slider-panel {
+    position: relative;
+    width: 100%;
+    left: 0;
+    height: auto;
+    min-height: 200px;
+    margin-bottom: 20px;
+  }
+
+  .panel-content {
+    padding: 20px !important;
+  }
+
+  .form-container.right-panel-active .slider-panel {
+    transform: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .form-container {
+    margin: 10px;
+  }
+
+  .form-section {
+    padding: 20px 15px;
+  }
+
+  .company-logo {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Animaciones */
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.notifications-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-toast {
+  min-width: 300px;
+  max-width: 400px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 4.7s forwards;
+  display: flex;
+  align-items: center;
+}
+
+.notification-toast.error {
+  background-color: #fee2e2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+}
+
+.notification-toast.success {
+  background-color: #dcfce7;
+  border-left: 4px solid #22c55e;
+  color: #166534;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-message {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 576px) {
+  .notifications-container {
+    left: 20px;
+  }
+
+  .notification-toast {
+    min-width: auto;
+    width: calc(100vw - 40px);
+  }
+}

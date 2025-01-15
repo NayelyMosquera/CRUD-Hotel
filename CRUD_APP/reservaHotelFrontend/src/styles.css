@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .notification-toast {
+    min-width: 300px;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+    display: flex;
+    align-items: center;
+  }
+  
+  .notification-toast.error {
+    background-color: #fee2e2;
+    border-left: 4px solid #ef4444;
+    color: #991b1b;
+  }
+  
+  .notification-toast.success {
+    background-color: #dcfce7;
+    border-left: 4px solid #22c55e;
+    color: #166534;
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .notification-icon {
+    font-size: 20px;
+  }
+  
+  .notification-message {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
