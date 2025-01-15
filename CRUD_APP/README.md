@@ -1,4 +1,4 @@
-# Proyecto Docker para Aplicación Full-Stack
+# CRUD Hotel
 
 Este proyecto contiene una aplicación full-stack que incluye un backend y un frontend, ambos ejecutándose en contenedores Docker. A continuación se detallan las instrucciones para construir y ejecutar los contenedores.
 
@@ -120,11 +120,22 @@ Para detener los contenedores en ejecución, presiona `Ctrl + C` en la terminal 
 ```
 docker-compose down
 ```
-## Instalar las dependecias del backend como del frontend 
+## Instalar las dependecias del backend como del frontend para iniciar sin Docker cd backendAPI-main y cd reservaHotelFrontend
 
 ```
 npm install
 ```
+## Para iniciar el backend
+
+```
+npm rum start
+```
+## Para iniciar el frontend
+
+```
+ng serve
+```
+
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, por favor abre un issue o un pull request.
